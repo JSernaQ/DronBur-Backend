@@ -6,7 +6,7 @@ class Server {
     constructor() {
         this.app = express();
         this.port = 3000;
-        this.path = {
+        this.paths = {
             user: 'api/user',
         }
 
@@ -29,13 +29,12 @@ class Server {
         this.app.get('/', (req, res) => {
             res.json({ message: '🚀 Servidor funcionando correctamente' });
         });
+        this.app.use(this.paths.user, require('./routes/user.routes'));
     }
 
     listen() {
         this.app.listen(this.port, () => {
-
             console.log(`Server listening on port ${this.port}!`)
-
         })
     }
 
