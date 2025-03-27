@@ -1,24 +1,25 @@
+const { text } = require('express');
 const mongoose = require('mongoose');
 
-const UserSchema = mongoose.Schema({
+const UserSchema = new mongoose.Schema({
 
     name: {
         type: String,
-        require: false,
+        required: false,
         unique: false,
         trim: true
     },
 
     username: {
         type: String,
-        require: true,
+        required: true,
         unique: true,
         trim: true,
     },
 
     phonenumber: {
         type: String,
-        require: true,
+        required: true,
         unique: true,
         trim: true
     },
@@ -26,9 +27,16 @@ const UserSchema = mongoose.Schema({
     img: {
         type: String,
         default: 'none',
-        require: false,
+        required: false,
         unique: false,
         trim: true
+    },
+
+    bio: {
+        type: String,
+        default: '',
+        required: false,
+        unique: false,
     }
 
 }, { timestamps: true });
