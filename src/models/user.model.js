@@ -3,25 +3,24 @@ const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
 
-    name: {
+    uidFB: {
         type: String,
-        required: false,
-        unique: false,
+        required: true,
+        unique: true,
         trim: true
     },
 
     username: {
         type: String,
-        required: true,
+        required: false,
         unique: true,
         trim: true,
+        default: '',
     },
 
-    phonenumber: {
+    email: {
         type: String,
         required: true,
-        unique: true,
-        trim: true
     },
 
     img: {

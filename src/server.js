@@ -7,7 +7,7 @@ class Server {
         this.app = express();
         this.port = 3000;
         this.paths = {
-            user: 'api/user',
+            user: '/api/user',
         }
 
         this.dbConnect();

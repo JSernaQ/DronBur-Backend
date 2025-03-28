@@ -5,7 +5,7 @@ const admin = require('../config/firebase')
 const getUserById = async (req, res) => {
 
     try {
-        
+
         const username = req.params.id;
 
         return res.status(200).json({
@@ -34,11 +34,41 @@ const getUserById = async (req, res) => {
 
 const createUser = async (req, res) => {
 
-    return res.status(200).json({
-        http: 200,
-        ok: true,
-        user: user
-    })
+    try {
+
+        const { email, uid, accessToken, photoURL, username } = req.body;
+
+        //Validate data
+        if (!email || !uid) {
+            return res.status(400).json({ 
+                http: 400, 
+                ok: false, 
+                error: "Faltan campos obligatorios (email o uid)" 
+            });
+        }   
+
+        //Create user
+        const newUser = await User.create({ 
+            uidFB: uid, 
+            email, 
+            username: username || email.split('@')[0], 
+            img: photoURL 
+        });
+
+
+        return res.status(201).json({
+            ok: true,
+            user: `Usuario creado correctamente`
+        });
+
+
+    } catch (error) {
+        console.error("Error al crear usuario:", error.message);
+        return res.status(500).json({
+            ok: false,
+            error: "Error interno del servidor"
+        });
+    }
 
 }
 
