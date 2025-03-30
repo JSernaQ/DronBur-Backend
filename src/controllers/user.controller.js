@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const { User } = require('../models/user.model');
-const admin = require('../config/firebase')
 
 const getUserById = async (req, res) => {
 
