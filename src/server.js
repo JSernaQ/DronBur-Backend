@@ -5,9 +5,10 @@ const cors = require('cors');
 class Server {
     constructor() {
         this.app = express();
-        this.port = 3000;
+        this.port = process.env.PORT || 3000;
         this.paths = {
             user: '/api/user',
+            post: '/api/post'
         }
 
         this.dbConnect();
@@ -30,6 +31,7 @@ class Server {
             res.json({ message: '🚀 Servidor funcionando correctamente' });
         });
         this.app.use(this.paths.user, require('./routes/user.routes'));
+        this.app.use(this.paths.post, require('./routes/post/post.routes'));
     }
 
     listen() {
