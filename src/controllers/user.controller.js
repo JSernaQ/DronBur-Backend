@@ -6,12 +6,14 @@ const getUserById = async (req, res) => {
 
     try {
 
-        const username = req.params.id;
+        const uid = req.params.uid;
+
+        const userInfo = await User.findOne({uidFB: uid});
 
         return res.status(200).json({
             http: 200,
             ok: true,
-            user: `Hola, ${username}`
+            userInfo
         })
 
         // const user = await User.findOne({ username: username });  
@@ -46,13 +48,13 @@ const createUser = async (req, res) => {
                 error: "Faltan campos obligatorios (email o uid)" 
             });
         }   
-
+ 
         //Create user
         const newUser = await User.create({ 
             uidFB: uid, 
             email, 
             username: username || email.split('@')[0], 
-            img: photoURL 
+            img: photoURL || ""
         });
 
 
