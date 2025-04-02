@@ -9,7 +9,7 @@ const createPost = async (req, res) => {
         const { uid, content, images, videos } = req.body;
 
         //Verify if user exist
-        const userExist = findUserByUidFB(uid);
+        const userExist = await findUserByUidFB(uid);
         
         if (!userExist) {
             return res.status(400).json({
@@ -17,7 +17,7 @@ const createPost = async (req, res) => {
                 msg: "El usuario no existe"
             });
         }
-
+        
         //Create new post with the information of body
         const newPost = await Post.create({user: userExist._id, content, images, videos})
 
@@ -29,7 +29,11 @@ const createPost = async (req, res) => {
 
     } catch (error) {
         console.error(error.message);
-        return res.status()        
+        return res.status(400).json({
+            ok: false,
+            msg: "Error al crear el post",
+            error: error
+        })        
     }
 
 }

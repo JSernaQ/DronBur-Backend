@@ -1,6 +1,6 @@
 const { User } = require('../models/user.model');
 
-async function findUserByUidFB(uid) {
+async function findUserById(uid) {
 
     try {
         
@@ -20,7 +20,7 @@ async function findUserByUidFB(uid) {
 
 };
 
-async function findUserById(uid) {
+async function findUserByUidFB(uid) {
 
     try {
 
