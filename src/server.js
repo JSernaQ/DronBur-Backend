@@ -8,7 +8,9 @@ class Server {
         this.port = process.env.PORT || 3000;
         this.paths = {
             user: '/api/user',
-            post: '/api/post'
+            post: '/api/post',
+            chat: '/api/chat',
+            message: '/api/message',
         }
 
         this.dbConnect();
@@ -32,6 +34,8 @@ class Server {
         });
         this.app.use(this.paths.user, require('./routes/user.routes'));
         this.app.use(this.paths.post, require('./routes/post/post.routes'));
+        this.app.use(this.paths.chat, require('./routes/chat/chat.routes'));
+        this.app.use(this.paths.message, require('./routes/chat/message.routes'));
     }
 
     listen() {
