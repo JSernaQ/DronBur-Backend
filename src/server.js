@@ -1,6 +1,9 @@
 const express = require('express')
 const { connecDB } = require('./config/db')
 const cors = require('cors');
+const { Server: SocketServer } = require('socket.io');
+const { createServer } = require('http');
+const setupChatSockets = require('./sockets/chat.sockets');
 
 class Server {
     constructor() {
@@ -13,10 +16,18 @@ class Server {
             message: '/api/message',
         }
 
+        this.server = createServer(this.app); 
+        this.io = new SocketServer(this.server, {
+            cors: {
+                origin: '*',
+                methods: ['GET', 'POST'],
+            },
+        });
+
         this.dbConnect();
         this.middlewares();
         this.routes();
-        // this.sockets();
+        this.sockets();
     }
 
     async dbConnect() {
@@ -38,8 +49,12 @@ class Server {
         this.app.use(this.paths.message, require('./routes/chat/message.routes'));
     }
 
+    sockets() {
+        setupChatSockets(this.io);
+    }
+
     listen() {
-        this.app.listen(this.port, () => {
+        this.server.listen(this.port, () => {
             console.log(`Server listening on port ${this.port}!`)
         })
     }
