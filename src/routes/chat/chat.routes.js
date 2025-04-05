@@ -10,7 +10,7 @@ const {
 
 
 //Get the information of a individual chat
-router.get('/:chatId',  getChat);
+router.get('/individual/:chatId',  getChat);
 
 //Get the entire list of chats of a user
 router.get('/:uid',  getChatList);

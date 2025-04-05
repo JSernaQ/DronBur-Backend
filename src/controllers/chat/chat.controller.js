@@ -26,7 +26,7 @@ const getChat = async(req, res) => {
     try {
         const chatId = req.params.chatId;
 
-        const infoChat = await Chat.findById(chatId);
+        const infoChat = await Chat.findById(chatId).populate('participants');
 
         res.status(200).json({
             infoChat
