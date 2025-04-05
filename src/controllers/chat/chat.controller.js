@@ -21,6 +21,24 @@ const getChatList = async (req, res) => {
     }
 };
 
+const getChat = async(req, res) => {
+
+    try {
+        const chatId = req.params.chatId;
+
+        const infoChat = await Chat.findById(chatId);
+
+        res.status(200).json({
+            infoChat
+        });
+
+    } catch (error) {
+        console.log('Error al obtener chat', error);
+        res.status(500).json({
+            msg: `Error al obtener chat: ${error}`
+        });
+    }
+}
 
 const newChat = async (req, res) => {
 
@@ -45,5 +63,6 @@ const newChat = async (req, res) => {
 
 module.exports = {
     getChatList,
-    newChat
+    newChat,
+    getChat
 }

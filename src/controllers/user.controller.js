@@ -15,16 +15,6 @@ const getUserById = async (req, res) => {
             userInfo
         })
 
-        // const user = await User.findOne({ username: username });  
-
-        // if (user) {
-        //     return res.status(200).json({
-        //         http: 200,
-        //         ok: true,
-        //         user: user
-        //     })
-        // }
-
     } catch (error) {
 
         console.log('Error: ', error);

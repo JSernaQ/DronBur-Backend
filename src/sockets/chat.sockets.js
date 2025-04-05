@@ -9,7 +9,7 @@ module.exports = function setUpChatSockets(io) {
         //Join a chat
         socket.on('joinChat', (chatId) => {
             socket.join(chatId);
-            console.log(`✅ Usuario se unió al chat: ${chatId}`);
+            console.log(`Usuario se unió al chat: ${chatId}`);
         });
 
         //Send message
@@ -17,7 +17,7 @@ module.exports = function setUpChatSockets(io) {
             const { chatId, sender, content, type } = data;
 
             try {
-                const newMessage = new Message({ chatId, sender, content, type });
+                const newMessage = new Message({ chatId, sender, content, messageType:type });
                 await newMessage.save();
 
                 io.to(chatId).emit('newMessage', newMessage);
