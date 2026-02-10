@@ -4,11 +4,13 @@ const router = Router();
 const {
     createPost,
     getOnePost,
-    getUserPosts
+    getUserPosts,
+    getFriendsPost
 } = require('../../controllers/post/post.controller')
 
 router.post('/create', createPost)
 router.get('/get-one-post/:postId', getOnePost)
-router.get('/get-posts-by-user/:uid', getUserPosts)
+router.post('/get-posts-by-user/:userId', getUserPosts)
+router.post('/get-friends-posts', getFriendsPost)
 
 module.exports = router;

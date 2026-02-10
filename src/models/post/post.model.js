@@ -16,14 +16,21 @@ const PostSchema = new mongoose.Schema({
     videos: [{
         type: String
     }],
-    likes: [{ 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: "User" 
+    likes: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     }],
     comments: [
         {
-            user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-            comment: String,
+            user: { 
+                type: mongoose.Schema.Types.ObjectId, 
+                ref: "User" 
+            },
+            comment: { 
+                type: String, 
+                trim: true, 
+                required: true 
+            },
             createdAt: { type: Date, default: Date.now }
         }
     ],

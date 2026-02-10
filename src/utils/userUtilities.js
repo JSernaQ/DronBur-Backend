@@ -4,7 +4,7 @@ async function findUserByUidFB(uid) {
 
     try {
         
-        user = await User.findById(uid);
+        let user = await User.findById(uid);
         
         if (!user) {
             console.error('No se encontro un usuario correspondiente al Uid');

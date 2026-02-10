@@ -4,7 +4,7 @@ const router = express.Router();
 const {
     createUser,
     getUserById
-} = require('../controllers/user.controller')
+} = require('../controllers/user/user.controller')
 
 router.post('/createUser', createUser)
 router.get('/:uid', getUserById)
